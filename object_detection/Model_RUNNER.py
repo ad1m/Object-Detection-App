@@ -1,9 +1,10 @@
 __author__ = 'Adamlieberman'
 import numpy as np
 import os
-from matplotlib import pyplot as plt
+import matplotlib
 matplotlib.use('Agg')
-import six.moves.urllib as urllib
+from matplotlib import pyplot as plt
+#import six.moves.urllib as urllib
 import sys
 import tarfile
 import tensorflow as tf
