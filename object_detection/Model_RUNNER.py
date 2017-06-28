@@ -1,16 +1,14 @@
 __author__ = 'Adamlieberman'
 import numpy as np
 import os
-import matplotlib
-matplotlib.use('Agg')
-from matplotlib import pyplot as plt
-#import six.moves.urllib as urllib
+import six.moves.urllib as urllib
 import sys
 import tarfile
 import tensorflow as tf
 import zipfile
 from collections import defaultdict
 from io import StringIO
+from matplotlib import pyplot as plt
 from PIL import Image
 #from utils import label_map_util
 #from utils import visualization_utils as vis_util
@@ -86,7 +84,7 @@ def run_model(image_name):
                   [boxes, scores, classes, num_detections],
                   feed_dict={image_tensor: image_np_expanded})
               # Visualization of the results of a detection.
-                visualize_boxes_and_labels_on_image_array(
+                count = visualize_boxes_and_labels_on_image_array(
                   image_np,
                   np.squeeze(boxes),
                   np.squeeze(classes).astype(np.int32),
@@ -98,7 +96,7 @@ def run_model(image_name):
                 plt.figure(figsize=IMAGE_SIZE)
                 print('saving plot')
                 #plt.savefig('../detected_images/'+str(image_np)+'.jpg')
-
+    return count
 
 def load_image_into_numpy_array(image):
   (im_width, im_height) = image.size
@@ -509,7 +507,7 @@ def visualize_boxes_and_labels_on_image_array(image,
                                               keypoints=None,
                                               use_normalized_coordinates=False,
                                               max_boxes_to_draw=20,
-                                              min_score_thresh=.5,
+                                              min_score_thresh=.35,
                                               agnostic_mode=False,
                                               line_thickness=4):
     #HERE THE THRESHOLD CAN be changed above
@@ -603,6 +601,28 @@ def visualize_boxes_and_labels_on_image_array(image,
           color=color,
           radius=line_thickness / 2,
           use_normalized_coordinates=use_normalized_coordinates)
+  count = 0
+  confidence = []
+  c = list(classes)
+  s = list(scores)
+  for i in range(len(c)):
+    if int(c[i]) in category_index.keys():
+      if s[i] > 0.4 and c[i] ==1 :
+        class_name = category_index[int(c[i])]['name']
+        print(class_name,':',s[i])
+        count = count + 1
+        confidence.append(s[i])
+        #print(class_name)
+        print('----')
+  print(count, " total people in the picture")
+
+  #get the average confidence
+  #print(sum(confidence)/len(confidence), " average confidence")
+  #print(max(confidence), " max confidence")
+  #print(min(confidence), "min confidence")
+  print('here')
+  return str(count)
+  print('here tooo')
 
 
 if __name__ == "__main__":

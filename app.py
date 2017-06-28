@@ -36,10 +36,14 @@ def index2():
         #return '<center><h1>successful upload</h1></center>'
         #message = '<center><font color="green"><h1>Successful Upload!</h1></font></center>'
         #flash(message)
-        Model_RUNNER.run_model('test_images/images/image1.png')
+        count = Model_RUNNER.run_model('test_images/images/image1.png')
+        print('******------')
+        print(count)
         millis = int(round(time.time() * 1000)) #A trick to prevent image static page caching
+        return_image  = '<center><br><br><img src="static/images/image1d.jpg?"'+str(millis)+'/></center>'
 
-        return ('<center><br><br><img src="static/images/image1d.jpg?"'+str(millis)+'/></center>')
+        #return ('<center><br><br><img src="static/images/image1d.jpg?"'+str(millis)+'/></center>')
+        return render_template('result.html',count=count,return_image=return_image)
     else:
         message = '<center><font color="red">Upload Failed Please Try Again</font></center>'
         flash(message)

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>DEMO</title>
+  
+  
+  
+      <link rel="stylesheet" href="../static/css/style.css">
+
+  
+</head>
+
+<body>
+<center><h1><font color="orange">Results</font></h1></center>
+<!--{% for message in get_flashed_messages()%}
+    {{ message | safe}}
+  {% endfor %} -->
+  <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  <br><br>
+<div class="file-upload" style="height:800px;width:800px">
+  <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">People: {{ count | safe}}</button>
+
+  <div class="image-upload-wrap">
+  </div>
+  <br>
+  <center>{{ return_image | safe }}</center>
+  <br>
+  <div class="image-upload-wrap">
+  </div>
+  <br><br>
+  <center><buttom class="file-upload-btn-submit" onclick="location.href='index.html';" >&nbsp&nbsp&nbsp&nbspBack&nbsp&nbsp&nbsp&nbsp</buttom></center>
+</div>
+  
+    <script src="../static/js/index.js"></script>
+
+</body>
+</html>
