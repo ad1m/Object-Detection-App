@@ -40,7 +40,7 @@ def index2():
         print('******------')
         print(count)
         millis = int(round(time.time() * 1000)) #A trick to prevent image static page caching
-        return_image  = '<center><br><br><img src="static/images/image1d.jpg?"'+str(millis)+'/></center>'
+        return_image  = '<center><br><br><img src="static/images/image1d.jpg?"'+str(millis)+' style="width:75%;height:75%"/></center>'
 
         #return ('<center><br><br><img src="static/images/image1d.jpg?"'+str(millis)+'/></center>')
         return render_template('result.html',count=count,return_image=return_image)
