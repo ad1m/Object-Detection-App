@@ -506,8 +506,8 @@ def visualize_boxes_and_labels_on_image_array(image,
                                               instance_masks=None,
                                               keypoints=None,
                                               use_normalized_coordinates=False,
-                                              max_boxes_to_draw=20,
-                                              min_score_thresh=.35,
+                                              max_boxes_to_draw=50,
+                                              min_score_thresh=.25,
                                               agnostic_mode=False,
                                               line_thickness=4):
     #HERE THE THRESHOLD CAN be changed above
