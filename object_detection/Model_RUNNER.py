@@ -507,7 +507,7 @@ def visualize_boxes_and_labels_on_image_array(image,
                                               keypoints=None,
                                               use_normalized_coordinates=False,
                                               max_boxes_to_draw=50,
-                                              min_score_thresh=.25,
+                                              min_score_thresh=.10,
                                               agnostic_mode=False,
                                               line_thickness=4):
     #HERE THE THRESHOLD CAN be changed above
@@ -607,7 +607,7 @@ def visualize_boxes_and_labels_on_image_array(image,
   s = list(scores)
   for i in range(len(c)):
     if int(c[i]) in category_index.keys():
-      if s[i] > 0.4 and c[i] ==1 :
+      if s[i] > 0.1 and c[i] ==1 :
         class_name = category_index[int(c[i])]['name']
         print(class_name,':',s[i])
         count = count + 1
