@@ -7,10 +7,27 @@ import os
 from os import listdir
 from os.path import isfile, join
 import time
+import requests
+import json
+
+
 app.config['UPLOAD_FOLDER'] = 'test_images/images'
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0 #SO WE DO NOT CACHE STATIC FILES LIKE IMAGES IN THE STATIC DIRECTORY
 app.secret_key = 'blahblahuploaderblahhhh'
 #index has a form that links to /classify_upload then we go below and handle what happens there and return stuff
+
+
+
+def perform_update(count,room_name):
+    ROOM_ID = '595524f783325f0d12d7dab1'
+    BASE_URL = 'http://hvachack.cloud.rnoc.gatech.edu/'
+    UPDATE_URL = BASE_URL + 'api/v1/rooms/' + ROOM_ID
+    data = {"location": room_name, "numPeople": str(count), "currentTemperature":"0"}
+    data_json = json.dumps(data)
+    response = requests.put(UPDATE_URL, data=data_json, headers={"Content-Type": "application/json"})
+    return
+
+
 
 def does_file_exist_in_dir(path):
     return any(isfile(join(path, i)) for i in listdir(path))
@@ -37,6 +54,7 @@ def index2():
         #message = '<center><font color="green"><h1>Successful Upload!</h1></font></center>'
         #flash(message)
         count = Model_RUNNER.run_model('test_images/images/image1.png')
+        perform_update(count,'Klaus 1256')
         print('******------')
         print(count)
         millis = int(round(time.time() * 1000)) #A trick to prevent image static page caching
